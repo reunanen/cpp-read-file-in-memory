@@ -14,9 +14,14 @@ void read_file_in_memory(const std::string& filename, T& contents)
 
     const std::streamsize size = file.tellg();
 
+    if (size > std::numeric_limits<size_t>::max()) {
+        throw std::runtime_error("File '" + filename + "' is too large: tellg() returned " + std::to_string(size)
+            + ", but std::numeric_limits<size_t>::max() is only " + std::to_string(std::numeric_limits<size_t>::max()));
+    }
+
     file.seekg(0, std::ios::beg);
 
-    contents.resize(size);
+    contents.resize(static_cast<size_t>(size));
 
     if (size > 0) {
         if (!file.read(&contents[0], size)) {
