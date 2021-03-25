@@ -14,7 +14,7 @@ void read_file_in_memory(const std::string& filename, T& contents)
 
     const std::streamsize size = file.tellg();
 
-    if (static_cast<uint64_t>(size) > static_cast<uint64_t>(std::numeric_limits<size_t>::max())) {
+    if (static_cast<uintmax_t>(size) > static_cast<uintmax_t>(std::numeric_limits<size_t>::max())) {
         throw std::runtime_error("File '" + filename + "' is too large: tellg() returned " + std::to_string(size)
             + ", but std::numeric_limits<size_t>::max() is only " + std::to_string(std::numeric_limits<size_t>::max()));
     }
