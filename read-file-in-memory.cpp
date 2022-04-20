@@ -1,5 +1,6 @@
 #include "read-file-in-memory.h"
 #include <fstream>
+#include <limits>
 
 template <typename T>
 void read_file_in_memory(const std::string& filename, T& contents)
